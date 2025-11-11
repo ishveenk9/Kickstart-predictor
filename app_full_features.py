@@ -24,7 +24,14 @@ st.markdown(
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* Remove empty box under title */
+    /* Make title black and remove any link */
+    .stTitle {
+        color: #000000 !important;
+        text-decoration: none !important;
+        pointer-events: none !important;
+    }
+
+    /* Remove random empty box under title */
     div[data-testid="stVerticalBlock"] > div:first-child:empty {
         display: none;
     }
@@ -70,7 +77,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# --- Title (unchanged) ---
+# --- Title ---
 st.title("Random Forest Predictor")
 
 # --- Collect categorical inputs ---
