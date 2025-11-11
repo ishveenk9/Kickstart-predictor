@@ -19,7 +19,7 @@ st.markdown(
     <style>
     /* Page background and general text */
     body, .stApp {
-        background-color: #cce7ff;  /* light blue */
+        background-color: #6699CC;  /* light blue */
         color: #000000 !important;  /* all text black */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
