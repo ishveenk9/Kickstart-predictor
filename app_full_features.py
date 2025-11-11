@@ -13,20 +13,20 @@ le = data["label_encoder"]
 features = data["features"]  # all features including one-hot
 categorical_options = data["categorical_options"]
 
-# --- Custom CSS ---
+# --- Custom CSS for a clean, cohesive look ---
 st.markdown(
     """
     <style>
     /* Background and font */
     body, .stApp {
-        background-color: #f0f2f6;
-        color: #333333;
+        background-color: #f8f9fa;  /* light gray */
+        color: #212529;              /* dark gray for text */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     /* Main title */
     .stTitle {
-        color: #1f77b4;
+        color: #0d6efd;  /* Bootstrap primary blue */
         font-size: 2.5em;
         font-weight: bold;
         text-align: center;
@@ -35,15 +35,15 @@ st.markdown(
 
     /* Section headers */
     h3 {
-        color: #1f77b4;
-        border-bottom: 2px solid #1f77b4;
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
         padding-bottom: 5px;
         margin-top: 25px;
     }
 
     /* Buttons */
     div.stButton > button:first-child {
-        background-color: #1f77b4;
+        background-color: #0d6efd;
         color: white;
         font-size: 16px;
         padding: 10px 20px;
@@ -53,26 +53,28 @@ st.markdown(
     }
 
     div.stButton > button:first-child:hover {
-        background-color: #105d91;
+        background-color: #0b5ed7;  /* darker blue on hover */
         color: white;
     }
 
     /* Input fields */
-    .stNumberInput, .stSelectbox {
+    .stNumberInput, .stSelectbox, .stTextInput {
         background-color: #ffffff;
         padding: 8px;
         border-radius: 6px;
-        border: 1px solid #cccccc;
+        border: 1px solid #ced4da;  /* subtle gray border */
+        margin-bottom: 10px;
     }
 
     /* Prediction output */
     .stMarkdown div {
-        background-color: #e6f2ff;
+        background-color: #e7f1ff;  /* soft blue highlight */
         padding: 15px;
         border-radius: 8px;
         margin-top: 20px;
         font-weight: bold;
         font-size: 18px;
+        border: 1px solid #0d6efd;
     }
     </style>
     """,
