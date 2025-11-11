@@ -1,35 +1,38 @@
 import streamlit as st
 
-# --- Custom CSS (same as Home) ---
-st.markdown("""
-<style>
-body, .stApp {
-    background-color: #6699CC;
-    color: #000000 !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.stTitle h1, .stTitle h1 a {
-    color: #000000 !important;
-    text-decoration: none !important;
-    pointer-events: none !important;
-}
-label, div[data-testid="stMarkdownContainer"] p {
-    color: #000000 !important;
-}
-</style>
-""", unsafe_allow_html=True)
+# --- Custom CSS (same as main page) ---
+st.markdown(
+    """
+    <style>
+    body, .stApp {
+        background-color: #6699CC;
+        color: #000000 !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .stTitle h1 {
+        color: #000000 !important;
+        text-decoration: none !important;
+        pointer-events: none !important;
+    }
+
+    label, div[data-testid="stMarkdownContainer"] p {
+        color: #000000 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 st.title("Feature Explanations")
 
-# Example: feature explanations
-feature_explanations = {
-    "age": "The age of the individual in years.",
-    "income": "Annual income in USD.",
-    "education": "Level of education achieved.",
-    "marital_status": "Marital status: Single, Married, Divorced, etc.",
-    "occupation": "Job type of the individual.",
-    "credit_score": "Credit score rating (300-850)."
-}
+st.markdown("""
+Here you can explain all the features used in your Random Forest model.  
+For example:
 
-for feature, explanation in feature_explanations.items():
-    st.markdown(f"**{feature}**: {explanation}")
+- **Feature A**: Description of Feature A
+- **Feature B**: Description of Feature B
+- **Feature C**: Description of Feature C
+
+Add all features and their explanations here to help users understand the model.
+""")
