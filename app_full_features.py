@@ -17,35 +17,24 @@ categorical_options = data["categorical_options"]
 st.markdown(
     """
     <style>
-    /* Full page background */
+    /* Page background and general text */
     body, .stApp {
         background-color: #cce7ff;  /* light blue */
-        color: #000000;             /* all text black */
+        color: #000000 !important;  /* all text black */
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* Remove Streamlit extra headers and sidebar links */
-    header, [data-testid="stSidebarNav"], .css-18ni7ap {display: none;}
-
-    /* White input container */
-    .input-container {
-        background-color: #ffffff;
-        padding: 25px;
-        border-radius: 12px;
-        margin-bottom: 20px;
+    /* Remove empty box under title */
+    div[data-testid="stVerticalBlock"] > div:first-child:empty {
+        display: none;
     }
 
-    /* Input fields */
-    input, select {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-        padding: 8px;
-        border-radius: 6px;
-        border: 1px solid #ced4da;
-        margin-bottom: 12px;
+    /* Input container styling */
+    .stNumberInput, .stSelectbox, .stTextInput {
+        color: #000000;  /* text inside inputs black */
     }
 
-    /* Button */
+    /* Button styling */
     div.stButton > button:first-child {
         background-color: #1a73e8;
         color: #ffffff;
@@ -53,14 +42,13 @@ st.markdown(
         padding: 12px 25px;
         border-radius: 10px;
         border: none;
-        width: 100%;
         transition: background-color 0.3s ease;
     }
     div.stButton > button:first-child:hover {
         background-color: #1558b0;
     }
 
-    /* Prediction output */
+    /* Prediction output box */
     .prediction-box {
         background-color: #ffffff;
         padding: 20px;
@@ -72,40 +60,30 @@ st.markdown(
         color: #000000;
         margin-top: 20px;
     }
-
-    /* Custom title */
-    .app-title {
-        text-align: center;
-        font-size: 3em;
-        font-weight: bold;
-        color: #000000;
-        margin-bottom: 40px;
-    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# --- Custom HTML title (removes 3-box problem) ---
-st.markdown('<div class="app-title">Random Forest Predictor</div>', unsafe_allow_html=True)
+# --- Title (unchanged) ---
+st.title("Random Forest Predictor")
 
-# --- White container for inputs ---
-st.markdown('<div class="input-container">', unsafe_allow_html=True)
-
-# Collect categorical inputs
+# --- Collect categorical inputs ---
+st.markdown("### Select categorical values:")
 user_data = {}
 for cat_col, options in categorical_options.items():
     user_data[cat_col] = st.selectbox(f"{cat_col}", options)
 
-# Collect numeric inputs
+# --- Collect numeric inputs ---
+st.markdown("### Enter numeric features:")
 numeric_features = [f for f in features if all(not f.startswith(cat + "_") for cat in categorical_options.keys())]
 numeric_input = {}
 for num_feat in numeric_features:
     numeric_input[num_feat] = st.number_input(f"{num_feat}", value=0.0)
 
-# Build input DataFrame
+# --- Build input DataFrame matching model features ---
 input_df = pd.DataFrame(columns=features)
-input_df.loc[0] = 0
+input_df.loc[0] = 0  # initialize all zeros
 
 # Set categorical selections
 for cat_col, choice in user_data.items():
@@ -117,12 +95,10 @@ for cat_col, choice in user_data.items():
 for num_feat, val in numeric_input.items():
     input_df.at[0, num_feat] = val
 
-# Scale features
+# --- Scale features ---
 user_input_scaled = scaler.transform(input_df)
 
-st.markdown('</div>', unsafe_allow_html=True)  # close input container
-
-# Predict button
+# --- Predict ---
 if st.button("Predict"):
     pred = model.predict(user_input_scaled)
     pred_label = le.inverse_transform(pred)
