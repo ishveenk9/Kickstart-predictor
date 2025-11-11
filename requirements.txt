@@ -31,3 +31,6 @@ tzdata>=2022.1
 python-dateutil>=2.8
 pytz>=2023.3
 six>=1.16
+
+
+dice-ml==1.11.0
