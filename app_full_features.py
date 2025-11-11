@@ -60,6 +60,11 @@ st.markdown(
         color: #000000;
         margin-top: 20px;
     }
+
+    /* Ensure all labels/text outside inputs are black */
+    label, div[data-testid="stMarkdownContainer"] p {
+        color: #000000 !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -69,13 +74,11 @@ st.markdown(
 st.title("Random Forest Predictor")
 
 # --- Collect categorical inputs ---
-st.markdown("### Select categorical values:")
 user_data = {}
 for cat_col, options in categorical_options.items():
     user_data[cat_col] = st.selectbox(f"{cat_col}", options)
 
 # --- Collect numeric inputs ---
-st.markdown("### Enter numeric features:")
 numeric_features = [f for f in features if all(not f.startswith(cat + "_") for cat in categorical_options.keys())]
 numeric_input = {}
 for num_feat in numeric_features:
