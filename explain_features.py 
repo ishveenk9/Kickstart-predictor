@@ -1,20 +1,40 @@
 import streamlit as st
-import pandas as pd
 
-st.title("Feature Explanation")
+# --- Custom CSS (same as Home) ---
+st.markdown(
+    """
+    <style>
+    body, .stApp {
+        background-color: #6699CC;
+        color: #000000 !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-st.markdown("""
-Here we explain all the features used in the Random Forest model:
-""")
+    .stTitle h1, .stTitle h1 a {
+        color: #000000 !important;
+        text-decoration: none !important;
+        pointer-events: none !important;
+    }
 
-# Example of showing feature explanations
-feature_info = {
-    "Age": "Age of the individual in years.",
-    "Salary": "Monthly salary in USD.",
-    "Department_Sales": "Binary indicator if the person is in Sales.",
-    "Department_IT": "Binary indicator if the person is in IT.",
-    # Add all your features here
+    label, div[data-testid="stMarkdownContainer"] p {
+        color: #000000 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.title("Feature Explanations")
+
+# Example: feature explanations
+feature_explanations = {
+    "age": "The age of the individual in years.",
+    "income": "Annual income in USD.",
+    "education": "Level of education achieved.",
+    "marital_status": "Marital status: Single, Married, Divorced, etc.",
+    "occupation": "Job type of the individual.",
+    "credit_score": "Credit score rating (300-850)."
 }
 
-for feat, desc in feature_info.items():
-    st.markdown(f"**{feat}**: {desc}")
+for feature, explanation in feature_explanations.items():
+    st.markdown(f"**{feature}**: {explanation}")
